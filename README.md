@@ -37,7 +37,7 @@ A minimal full-stack AI-powered customer support chat application with JWT authe
 ### 1. Clone Repository
 
 ```bash
-git clone <YOUR_REPO_URL>
+git clone https://github.com/ancypeter2k/ai-customer-support-agent.git
 cd project-root
 ```
 
