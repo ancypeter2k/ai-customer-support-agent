@@ -1,0 +1,31 @@
+services:
+  mongo:
+    image: mongo:6.0
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  server:
+    build: ./server
+    restart: unless-stopped
+    env_file:
+      - ./server/.env
+    ports:
+      - "5001:5000"
+    depends_on:
+      - mongo
+
+  chatbot:
+    build: ./chatbot
+    restart: unless-stopped
+    env_file:
+      - ./chatbot/.env
+    ports:
+      - "3000:3000"
+    depends_on:
+      - server
+
+volumes:
+  mongo_data:
