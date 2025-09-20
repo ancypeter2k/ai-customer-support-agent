@@ -11,7 +11,7 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const CLIENT_URL = "http://localhost:3000";
+const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:3000";
 
 connectDB();
 
@@ -20,7 +20,7 @@ app.use(cookieParser());
 
 app.use(cors({
   origin: function (origin, callback) {
-    const allowedOrigins = [process.env.CLIENT_URL, process.env.VERCEL_URL];
+    const allowedOrigins = [process.env.CLIENT_URL, "http://localhost:8000", process.env.VERCEL_URL, process.env.RENDER_URL];
     if (!origin || allowedOrigins.includes(origin)) {
       console.log("CORS - Allowed origin:", origin);
       callback(null, true);
