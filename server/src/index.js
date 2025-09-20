@@ -11,7 +11,7 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:3000";
+const CLIENT_URL = "http://localhost:3000";
 
 connectDB();
 
@@ -19,7 +19,16 @@ app.use(express.json({ limit: "1mb" }));
 app.use(cookieParser());
 
 app.use(cors({
-  origin: CLIENT_URL,
+  origin: function (origin, callback) {
+    const allowedOrigins = [process.env.CLIENT_URL, process.env.VERCEL_URL];
+    if (!origin || allowedOrigins.includes(origin)) {
+      console.log("CORS - Allowed origin:", origin);
+      callback(null, true);
+    } else {
+      console.log("CORS - Blocked origin:", origin);
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
