@@ -96,3 +96,13 @@ export const getHistory = async (req, res) => {
     res.status(500).json({ message: "Failed to fetch history" });
   }
 };
+
+export const createNewConversation = async (req, res) => {
+  try {
+    const conv = await Conversation.create({ user: req.user._id, title: "New conversation" });
+    return res.status(201).json({ conversation: conv });
+  } catch (err) {
+    console.error("createNewConversation error:", err);
+    return res.status(500).json({ message: "Failed to create new conversation" });
+  }
+};

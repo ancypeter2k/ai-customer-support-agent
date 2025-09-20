@@ -19,8 +19,10 @@ export default function Chat() {
         setConversation(resp.data.conversations[0]);
         loadHistory(resp.data.conversations[0].id);
       } else {
-        setConversation(null);
-        setMessages([]);
+        // If no conversations exist, create a new one
+        const newConvResp = await api.post("/chat/new");
+        setConversation(newConvResp.data.conversation);
+        loadHistory(newConvResp.data.conversation._id);
       }
     } catch (err) {
       console.error(err);

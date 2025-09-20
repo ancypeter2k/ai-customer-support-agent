@@ -6,7 +6,12 @@ export default function App() {
   const { user, fetchMe, logout } = useContext(AuthContext);
   const nav = useNavigate();
 
-  useEffect(() => { fetchMe(); }, []);
+  useEffect(() => {
+    fetchMe();
+    if (!user && window.location.pathname !== '/login' && window.location.pathname !== '/signup') {
+      nav('/login');
+    }
+  }, [user, fetchMe, nav]);
 
   const handleLogout = async () => {
     await logout();
@@ -16,7 +21,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-gray-50 overflow-hidden flex flex-col">
       <header className="bg-white shadow px-4 py-3 flex justify-between items-center">
-        <div className="text-xl font-semibold">AI Support</div>
+        <div className="text-xl font-semibold"><img src="/robo.png" alt="AI Support Logo" className="h-8 w-8 inline-block mr-2" />AI Support</div>
         <nav>
           {user ? (
             <div className="flex items-center gap-4">
