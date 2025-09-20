@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: [process.env.CLIENT_URL, process.env.VERCEL_URL],
-
+  baseURL: "http://localhost:8000",
+  
   withCredentials: true,
 });
 
