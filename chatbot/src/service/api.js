@@ -1,8 +1,11 @@
 import axios from "axios";
 
+const baseURL = import.meta.env.VITE_RENDER_URL || "http://localhost:8000";
+console.log("API Base URL:", baseURL);
+console.log("Environment variables:", import.meta.env);
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_RENDER_URL || "http://localhost:8000",
-  
+  baseURL: baseURL,
   withCredentials: true,
 });
 
