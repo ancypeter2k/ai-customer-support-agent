@@ -6,7 +6,12 @@ export default function App() {
   const { user, fetchMe, logout } = useContext(AuthContext);
   const nav = useNavigate();
 
-  useEffect(() => { fetchMe(); }, []);
+  useEffect(() => {
+    fetchMe();
+    if (!user && window.location.pathname !== '/login' && window.location.pathname !== '/signup') {
+      nav('/login');
+    }
+  }, [user, fetchMe, nav]);
 
   const handleLogout = async () => {
     await logout();
