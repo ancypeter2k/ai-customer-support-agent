@@ -9,9 +9,17 @@ import { rateLimiter } from "./middleware/rateLimiter.js";
 
 dotenv.config();
 
+console.log('--- Server Environment Variables ---');
+for (const key in process.env) {
+  if (key.startsWith('MONGO') || key.startsWith('JWT') || key.startsWith('CLIENT_URL') || key.startsWith('VERCEL_URL') || key.startsWith('RENDER_URL') || key.startsWith('NODE_ENV')) {
+    console.log(`${key}=${process.env[key]}`);
+  }
+}
+console.log('--- End Environment Variables ---');
+
 const app = express();
 const PORT = process.env.PORT || 5000;
-const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:5173";
+const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:3000";
 
 connectDB();
 
@@ -20,7 +28,7 @@ app.use(cookieParser());
 
 app.use(cors({
   origin: function (origin, callback) {
-    const allowedOrigins = [CLIENT_URL, "http://localhost:8000", "http://localhost:5173", process.env.VERCEL_URL, process.env.RENDER_URL];
+    const allowedOrigins = [CLIENT_URL, "http://localhost:8000", process.env.VERCEL_URL, process.env.RENDER_URL];
     if (!origin || allowedOrigins.includes(origin)) {
       console.log("CORS - Allowed origin:", origin);
       callback(null, true);

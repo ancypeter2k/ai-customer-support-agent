@@ -4,7 +4,8 @@ import User from "../models/User.js";
 
 const createToken = (userId) => {
   const expiresIn = process.env.JWT_EXPIRES_IN || "7d";
-  return jwt.sign({ id: userId }, process.env.JWT_SECRET, { expiresIn });
+  const secret = process.env.JWT_SECRET || "fallback_jwt_secret_for_dev"; // TEMPORARY FALLBACK
+  return jwt.sign({ id: userId }, secret, { expiresIn });
 };
 
 export const signup = async (req, res) => {
@@ -69,7 +70,7 @@ export const me = async (req, res) => {
     const token = req.cookies?.token || (req.headers.authorization ? req.headers.authorization.split(" ")[1] : null);
     if (!token) return res.status(200).json({ user: null });
 
-    const payload = jwt.verify(token, process.env.JWT_SECRET);
+    const payload = jwt.verify(token, process.env.JWT_SECRET || "fallback_jwt_secret_for_dev"); // TEMPORARY FALLBACK
     const user = await User.findById(payload.id).select("-passwordHash");
     res.json({ user });
   } catch (err) {
