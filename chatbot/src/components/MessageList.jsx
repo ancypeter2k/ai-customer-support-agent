@@ -1,16 +1,21 @@
 import React, { useEffect, useRef } from "react";
 
-export default function MessageList({ messages }) {
-  const ref = useRef();
+export default function MessageList({ messages, userId }) {
+  const messagesEndRef = useRef(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
   useEffect(() => {
-    if (ref.current) ref.current.scrollTop = ref.current.scrollHeight;
+    scrollToBottom();
   }, [messages]);
 
   return (
-    <div ref={ref} className="flex-1 p-4 overflow-auto scrollbar-hide bg-white rounded">
-      {messages.map((m) => (
+    <div className="flex-1 p-4 overflow-auto scrollbar-hide bg-white rounded">
+      {messages.map((m, index) => (
         <div
-          key={m._id}
+          key={m._id || index}
           className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}
         >
           <div
@@ -24,6 +29,7 @@ export default function MessageList({ messages }) {
           </div>
         </div>
       ))}
+      <div ref={messagesEndRef} />
     </div>
   );
 }

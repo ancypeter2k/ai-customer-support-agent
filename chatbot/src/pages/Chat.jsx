@@ -63,7 +63,7 @@ export default function Chat() {
   };
 
   return (
-    <div className="w-full h-screen flex flex-col bg-gray-100 p-4">
+    <div className="w-full flex-1 flex flex-col bg-gray-100 p-4">
       <div className="flex-1 overflow-y-auto mb-2">
         <MessageList messages={messages} userId={user?.id} />
       </div>

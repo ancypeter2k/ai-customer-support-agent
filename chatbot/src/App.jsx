@@ -14,7 +14,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 overflow-hidden flex flex-col">
       <header className="bg-white shadow px-4 py-3 flex justify-between items-center">
         <div className="text-xl font-semibold">AI Support</div>
         <nav>
@@ -32,7 +32,7 @@ export default function App() {
         </nav>
       </header>
 
-      <main className="p-4">
+      <main className="flex-1 flex flex-col overflow-y-auto">
         <Outlet />
       </main>
     </div>
