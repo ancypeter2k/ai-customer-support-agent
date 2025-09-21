@@ -135,7 +135,7 @@ docker compose up --build
 
 ### 5. Deployment
 
-*   **Live Demo:** [AI Customer Support Agent](https://ai-customer-support-agent-git-main-ancy-peters-projects.vercel.app/chat)
+*   **Live Demo:** [AI Customer Support Agent](https://ai-customer-support-agent-5o9wtm12a-ancy-peters-projects.vercel.app/login)
 *   **Frontend:** Deploy to platforms like Vercel or Netlify.
 *   **Backend:** Deploy to services like Render or Railway.
 
