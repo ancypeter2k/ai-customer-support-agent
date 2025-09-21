@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = import.meta.env.VITE_RENDER_URL || import.meta.env.RENDER_URL || "http://localhost:8000";
+const baseURL = import.meta.env.VITE_RENDER_URL || import.meta.env.RENDER_URL || "https://ai-customer-support-agent-4c94.onrender.com";
 console.log("API Base URL:", baseURL);
 console.log("VITE_RENDER_URL:", import.meta.env.VITE_RENDER_URL);
 console.log("RENDER_URL:", import.meta.env.RENDER_URL);
