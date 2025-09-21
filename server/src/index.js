@@ -39,15 +39,19 @@ app.use(cors({
       "https://ai-customer-support-agent-opal.vercel.app"
     ];
     
+    // Allow all Vercel deployment URLs
+    const isVercelDeployment = origin && origin.includes('.vercel.app');
+    
     console.log("=== CORS DEBUG ===");
     console.log("CORS - Checking origin:", origin);
+    console.log("CORS - Is Vercel deployment:", isVercelDeployment);
     console.log("CORS - Allowed origins:", allowedOrigins);
     console.log("CORS - CLIENT_URL:", CLIENT_URL);
     console.log("CORS - VERCEL_URL:", process.env.VERCEL_URL);
     console.log("CORS - RENDER_URL:", process.env.RENDER_URL);
     console.log("==================");
     
-    if (!origin || allowedOrigins.includes(origin)) {
+    if (!origin || allowedOrigins.includes(origin) || isVercelDeployment) {
       console.log("✅ CORS - Allowed origin:", origin);
       callback(null, true);
     } else {
