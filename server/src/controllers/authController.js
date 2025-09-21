@@ -22,9 +22,10 @@ export const signup = async (req, res) => {
     const token = createToken(user._id);
     res.cookie("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production" ? true : false,
-      sameSite: process.env.NODE_ENV === "production" ? "Lax" : "Lax",
-      maxAge: 1000 * 60 * 60 * 24 * 7
+      secure: true, // Always secure for production cross-domain
+      sameSite: "None", // Required for cross-domain cookies
+      maxAge: 1000 * 60 * 60 * 24 * 7,
+      domain: ".onrender.com" // Allow cookies for Render domain
     });
 
     res.status(201).json({ id: user._id, email: user.email, name: user.name });
@@ -48,9 +49,10 @@ export const login = async (req, res) => {
     const token = createToken(user._id);
     res.cookie("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production" ? true : false,
-      sameSite: process.env.NODE_ENV === "production" ? "Lax" : "Lax",
-      maxAge: 1000 * 60 * 60 * 24 * 7
+      secure: true, // Always secure for production cross-domain
+      sameSite: "None", // Required for cross-domain cookies
+      maxAge: 1000 * 60 * 60 * 24 * 7,
+      domain: ".onrender.com" // Allow cookies for Render domain
     });
 
     res.json({ id: user._id, email: user.email, name: user.name });
