@@ -28,7 +28,20 @@ app.use(cookieParser());
 
 app.use(cors({
   origin: function (origin, callback) {
-    const allowedOrigins = [CLIENT_URL, "http://localhost:8000", process.env.VERCEL_URL, process.env.RENDER_URL];
+    const allowedOrigins = [
+      CLIENT_URL, 
+      "http://localhost:8000", 
+      "http://localhost:3000",
+      "http://localhost:5173",
+      process.env.VERCEL_URL, 
+      process.env.RENDER_URL,
+      "https://ai-customer-support-agent-lpcnurj1i-ancy-peters-projects.vercel.app",
+      "https://ai-customer-support-agent-opal.vercel.app"
+    ];
+    
+    console.log("CORS - Checking origin:", origin);
+    console.log("CORS - Allowed origins:", allowedOrigins);
+    
     if (!origin || allowedOrigins.includes(origin)) {
       console.log("CORS - Allowed origin:", origin);
       callback(null, true);
